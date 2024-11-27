@@ -2,11 +2,20 @@ name: First workflow
 on:
   - pull_request
   - workflow_dispatch
+  - push
 jobs:
   first-job:
     runs-on: ubuntu-latest
     steps:
       - name: Print
         run: echo "Hello"
-      - name: Print BYE
-        run: echo "BYE"
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup jdk
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+      - name: build app
+        run: mvn clean install
+      - name: Run tests
+        run: mvn test
