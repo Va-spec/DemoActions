@@ -1,0 +1,12 @@
+name: First workflow
+on:
+  - pull_request
+  - workflow_dispatch
+jobs:
+  first-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print
+        run: echo "Hello"
+      - name: Print BYE
+        run: echo "BYE"
