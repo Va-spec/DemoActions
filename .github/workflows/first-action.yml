@@ -14,6 +14,7 @@ jobs:
       - name: Setup jdk
         uses: actions/setup-java@v4
         with:
+          distribution: 'corretto'
           java-version: '17'
       - name: build app
         run: mvn clean install
