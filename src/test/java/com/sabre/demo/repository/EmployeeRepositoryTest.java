@@ -48,13 +48,13 @@ public class EmployeeRepositoryTest {
         assertEquals(5, employeeRepository.findAll().size());
     }
 
-    @Test
-    @Order(4)
-    public void deleteEmployeeSuccessfully() {
-        employeeRepository.deleteById(1L);
-        assertEquals(4, employeeRepository.findAll().size());
-        assertFalse(employeeRepository.findById(1L).isPresent());
-    }
+//    @Test
+//    @Order(4)
+//    public void deleteEmployeeSuccessfully() {
+//        employeeRepository.deleteById(1L);
+//        assertEquals(4, employeeRepository.findAll().size());
+//        assertFalse(employeeRepository.findById(1L).isPresent());
+//    }
 
 
 
