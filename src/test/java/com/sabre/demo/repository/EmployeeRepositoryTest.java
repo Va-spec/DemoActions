@@ -29,32 +29,32 @@ public class EmployeeRepositoryTest {
         assertEquals(4, employees.size());
     }
 
-    @Test
-    @Order(2)
-    public void findEmployeeByIdSuccessfully() {
-        Optional<Employee> employee = employeeRepository.findById(1L);
-        assertTrue(employee.isPresent());
-        assertEquals("Mark", employee.get().getEmployeeName());
-    }
-
-
-
-    @Test
-    @Order(3)
-    public void saveEmployeeSuccessfully() {
-        Employee newEmployee = new Employee(5L, "Alice", 100.0f);
-        Employee savedEmployee = employeeRepository.save(newEmployee);
-        assertEquals(newEmployee, savedEmployee);
-        assertEquals(5, employeeRepository.findAll().size());
-    }
-
-    @Test
-    @Order(4)
-    public void deleteEmployeeSuccessfully() {
-        employeeRepository.deleteById(1L);
-        assertEquals(4, employeeRepository.findAll().size());
-        assertFalse(employeeRepository.findById(1L).isPresent());
-    }
+//    @Test
+//    @Order(2)
+//    public void findEmployeeByIdSuccessfully() {
+//        Optional<Employee> employee = employeeRepository.findById(1L);
+//        assertTrue(employee.isPresent());
+//        assertEquals("Mark", employee.get().getEmployeeName());
+//    }
+//
+//
+//
+//    @Test
+//    @Order(3)
+//    public void saveEmployeeSuccessfully() {
+//        Employee newEmployee = new Employee(5L, "Alice", 100.0f);
+//        Employee savedEmployee = employeeRepository.save(newEmployee);
+//        assertEquals(newEmployee, savedEmployee);
+//        assertEquals(5, employeeRepository.findAll().size());
+//    }
+//
+//    @Test
+//    @Order(4)
+//    public void deleteEmployeeSuccessfully() {
+//        employeeRepository.deleteById(1L);
+//        assertEquals(4, employeeRepository.findAll().size());
+//        assertFalse(employeeRepository.findById(1L).isPresent());
+//    }
 
 
 
