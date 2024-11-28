@@ -18,18 +18,18 @@ jobs:
           java-version: '17'
       - name: build app
         run: mvn clean install
-      - name: Run tests
-        run: mvn test
+#      - name: Run tests
+#        run: mvn test
       - name: SonarQube Scan
-        uses: sonarsource/sonarqube-scan-action@master
-        with:
-          projectBaseDir: .
-          args: >
-            -Dsonar.organization=va-spec
-            -Dsonar.projectKey=DemoActions
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        run: |
+          mvn sonar:sonar \
+          -Dsonar.projectKey=DemoActions \
+          -Dsonar.host.url=$SONAR_HOST_URL \
+          -Dsonar.login=$SONAR_TOKEN \
+          -Dsonar.java.binaries=target
   deploy:
     needs: [tests] # to make it parallel
     runs-on: ubuntu-latest
