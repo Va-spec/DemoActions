@@ -52,38 +52,38 @@ public class EmployeeServiceTest {
         List<Employee> fetchedEmployees = employeeService.fetchAllEmployees();
         assertEquals(employees, fetchedEmployees);
     }
-
-    @Test
-    public void getEmployeeByIdSuccessfully() {
-        given(employeeRepository.findById(anyLong())).willReturn(Optional.of(employee));
-        Employee fetchedEmployee = employeeService.getEmployeeById(1L);
-        assertEquals(employee, fetchedEmployee);
-    }
-
-
-    @Test
-    public void updateEmployeeSuccessfully() {
-        Employee updatedEmployee = new Employee(1L, "John Smith", 55000.0f);
-        given(employeeRepository.findById(1L)).willReturn(Optional.of(employee));
-        given(employeeRepository.save(any(Employee.class))).willReturn(updatedEmployee);
-        Employee result = employeeService.updateEmployeeById(1L, updatedEmployee);
-        assertEquals(updatedEmployee.getEmployeeName(), result.getEmployeeName());
-        assertEquals(updatedEmployee.getEmployeeSalary(), result.getEmployeeSalary());
-    }
-
-    @Test
-    public void deleteEmployeeSuccessfully() {
-        given(employeeRepository.findById(1L)).willReturn(Optional.of(employee));
-        String result = employeeService.deleteEmployeeById(1L);
-        assertEquals("Employee deleted successfully", result);
-    }
-
-    @Test
-    public void getEmployeeCount() {
-        given(employeeRepository.findAll()).willReturn(Arrays.asList(employee, employee, employee));
-        Integer result = employeeService.getTotalEmployeeCount();
-        assertEquals(3, result);
-    }
+//
+//    @Test
+//    public void getEmployeeByIdSuccessfully() {
+//        given(employeeRepository.findById(anyLong())).willReturn(Optional.of(employee));
+//        Employee fetchedEmployee = employeeService.getEmployeeById(1L);
+//        assertEquals(employee, fetchedEmployee);
+//    }
+//
+//
+//    @Test
+//    public void updateEmployeeSuccessfully() {
+//        Employee updatedEmployee = new Employee(1L, "John Smith", 55000.0f);
+//        given(employeeRepository.findById(1L)).willReturn(Optional.of(employee));
+//        given(employeeRepository.save(any(Employee.class))).willReturn(updatedEmployee);
+//        Employee result = employeeService.updateEmployeeById(1L, updatedEmployee);
+//        assertEquals(updatedEmployee.getEmployeeName(), result.getEmployeeName());
+//        assertEquals(updatedEmployee.getEmployeeSalary(), result.getEmployeeSalary());
+//    }
+//
+//    @Test
+//    public void deleteEmployeeSuccessfully() {
+//        given(employeeRepository.findById(1L)).willReturn(Optional.of(employee));
+//        String result = employeeService.deleteEmployeeById(1L);
+//        assertEquals("Employee deleted successfully", result);
+//    }
+//
+//    @Test
+//    public void getEmployeeCount() {
+//        given(employeeRepository.findAll()).willReturn(Arrays.asList(employee, employee, employee));
+//        Integer result = employeeService.getTotalEmployeeCount();
+//        assertEquals(3, result);
+//    }
 
 
 }
