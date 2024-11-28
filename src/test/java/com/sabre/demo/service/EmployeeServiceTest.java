@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
@@ -62,27 +61,26 @@ public class EmployeeServiceTest {
     }
 
 
-
     @Test
     public void updateEmployeeSuccessfully() {
         Employee updatedEmployee = new Employee(1L, "John Smith", 55000.0f);
         given(employeeRepository.findById(1L)).willReturn(Optional.of(employee));
         given(employeeRepository.save(any(Employee.class))).willReturn(updatedEmployee);
         Employee result = employeeService.updateEmployeeById(1L, updatedEmployee);
-        assertNotEquals(updatedEmployee.getEmployeeName(), result.getEmployeeName());
-        assertNotEquals(updatedEmployee.getEmployeeSalary(), result.getEmployeeSalary());
+        assertEquals(updatedEmployee.getEmployeeName(), result.getEmployeeName());
+        assertEquals(updatedEmployee.getEmployeeSalary(), result.getEmployeeSalary());
     }
 
     @Test
     public void deleteEmployeeSuccessfully() {
         given(employeeRepository.findById(1L)).willReturn(Optional.of(employee));
         String result = employeeService.deleteEmployeeById(1L);
-        assertNotEquals("Employee deleted successfully", result);
+        assertEquals("Employee deleted successfully", result);
     }
 
     @Test
     public void getEmployeeCount() {
-        given(employeeRepository.findAll()).willReturn(Arrays.asList(employee,employee,employee));
+        given(employeeRepository.findAll()).willReturn(Arrays.asList(employee, employee, employee));
         Integer result = employeeService.getTotalEmployeeCount();
         assertEquals(3, result);
     }
