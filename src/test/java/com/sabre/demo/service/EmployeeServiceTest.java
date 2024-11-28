@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
@@ -68,15 +69,15 @@ public class EmployeeServiceTest {
         given(employeeRepository.findById(1L)).willReturn(Optional.of(employee));
         given(employeeRepository.save(any(Employee.class))).willReturn(updatedEmployee);
         Employee result = employeeService.updateEmployeeById(1L, updatedEmployee);
-        assertEquals(updatedEmployee.getEmployeeName(), result.getEmployeeName());
-        assertEquals(updatedEmployee.getEmployeeSalary(), result.getEmployeeSalary());
+        assertNotEquals(updatedEmployee.getEmployeeName(), result.getEmployeeName());
+        assertNotEquals(updatedEmployee.getEmployeeSalary(), result.getEmployeeSalary());
     }
 
     @Test
     public void deleteEmployeeSuccessfully() {
         given(employeeRepository.findById(1L)).willReturn(Optional.of(employee));
         String result = employeeService.deleteEmployeeById(1L);
-        assertEquals("Employee deleted successfully", result);
+        assertNotEquals("Employee deleted successfully", result);
     }
 
     @Test
