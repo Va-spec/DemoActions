@@ -2,11 +2,7 @@ name: First workflow
 on:
   - pull_request
   - workflow_dispatch
-  - push:
-      branches:
-        - main
-        #- 'dev-*'
-        #- 'feat/**'
+  - push
 jobs:
   tests:
     runs-on: ubuntu-latest
