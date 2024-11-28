@@ -54,11 +54,19 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public String deleteDepartmentById(Long id) {
+    public String deleteEmployeeById(Long id) {
         if (employeeRepository.findById(id).isPresent()) {
             employeeRepository.deleteById(id);
             return "Employee deleted successfully";
         }
         return "No such employee in the database";
     }
+
+    @Override
+    public Integer getTotalEmployeeCount() {
+        List<Employee> all = employeeRepository.findAll();
+        Integer count=all.size();
+        return count;
+    }
+
 }

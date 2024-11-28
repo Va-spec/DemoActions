@@ -101,7 +101,7 @@ public class EmployeeControllerTest {
     @Test
     @Order(5)
     public void deleteEmployee() throws Exception {
-        given(employeeService.deleteDepartmentById(anyLong())).willReturn("Employee deleted successfully");
+        given(employeeService.deleteEmployeeById(anyLong())).willReturn("Employee deleted successfully");
         ResultActions response = mockMvc.perform(delete("/employee/delete/1")
                 .contentType(MediaType.APPLICATION_JSON));
         response.andDo(print())

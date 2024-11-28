@@ -75,8 +75,15 @@ public class EmployeeServiceTest {
     @Test
     public void deleteEmployeeSuccessfully() {
         given(employeeRepository.findById(1L)).willReturn(Optional.of(employee));
-        String result = employeeService.deleteDepartmentById(1L);
+        String result = employeeService.deleteEmployeeById(1L);
         assertEquals("Employee deleted successfully", result);
+    }
+
+    @Test
+    public void getEmployeeCount() {
+        given(employeeRepository.findAll()).willReturn(Arrays.asList(employee,employee,employee));
+        Integer result = employeeService.getTotalEmployeeCount();
+        assertEquals(3, result);
     }
 
 
