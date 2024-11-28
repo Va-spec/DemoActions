@@ -1,8 +1,10 @@
 name: First workflow
+
 on:
   pull_request:
   workflow_dispatch:
   push:
+
 jobs:
   tests:
     runs-on: ubuntu-latest
@@ -27,12 +29,15 @@ jobs:
 
       - name: Verify Coverage
         run: |
-          COVERAGE=$(grep -oP '(?<=<counter type="INSTRUCTION" missed=".*" covered=")[0-9]+' target/site/jacoco/jacoco.xml | awk '{s+=$1} END {print s}')
-          TOTAL=$(grep -oP '(?<=<counter type="INSTRUCTION" missed=")[0-9]+' target/site/jacoco/jacoco.xml | awk '{s+=$1} END {print s}')
-          PERCENTAGE=$(awk "BEGIN {print ($COVERAGE/($COVERAGE+$TOTAL))*100}")
-          echo "Coverage: $PERCENTAGE%"
-          if (( $(echo "$PERCENTAGE < 85" | bc -l) )); then
-            echo "Coverage below threshold: $PERCENTAGE%"
+          MISSED=$(grep -oP '(?<=missed=")[0-9]+' target/site/jacoco/jacoco.xml | awk '{s+=$1} END {print s}')
+          COVERED=$(grep -oP '(?<=covered=")[0-9]+' target/site/jacoco/jacoco.xml | awk '{s+=$1} END {print s}')
+          echo "Missed Instructions: $MISSED"
+          echo "Covered Instructions: $COVERED"
+          TOTAL=$(echo "$MISSED + $COVERED" | bc)
+          COVERAGE=$(echo "scale=2; ($COVERED / $TOTAL) * 100" | bc)
+          echo "Total Coverage: $COVERAGE%"
+          if (( $(echo "$COVERAGE < 85" | bc -l) )); then
+            echo "Coverage is below threshold: $COVERAGE%"
             exit 1
           fi
 
@@ -62,7 +67,7 @@ jobs:
           fi
 
   deploy:
-    needs: [ tests ] # Make it dependent on 'tests'
+    needs: [tests]
     runs-on: ubuntu-latest
     steps:
       - name: Deploying
